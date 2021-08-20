@@ -1,8 +1,8 @@
-## sbt project compiled with Scala 3
+## mill project compiled with Scala 3
 
 ### Usage
 
-This is a normal sbt project. You can compile code with `sbt compile`, run it with `sbt run`, and `sbt console` will start a Scala 3 REPL.
+This is a normal mill project. You can compile code with `millw helloworld.compile`, run it with `millw helloworld.run`, and `millw -i helloworld.console` will start a Scala 3 REPL.
 
-For more information on the sbt-dotty plugin, see the
-[scala3-example-project](https://github.com/scala/scala3-example-project).
+For more information, see the
+[Mill Documentation](https://com-lihaoyi.github.io/mill/mill/Intro_to_Mill.html).
