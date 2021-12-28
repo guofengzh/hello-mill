@@ -2,7 +2,7 @@
 
 import mill._, scalalib._
 
-val scala3Version = "3.1.0-RC2"
+val scala3Version = "3.1.0"
 
 trait BetterFilesModule extends SbtModule{
 
