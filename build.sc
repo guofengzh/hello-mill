@@ -1,7 +1,7 @@
 //import mill.scalalib.{SbtModule, TestModule, Dep, DepSyntax}
 
 import mill._, scalalib._
-//import mill.scalalib.bsp.ScalaMetalsSupport
+//import mill.scalalib.bsp.ScalaMetalsSupport, coming soon in v0.10.0
 
 val scala3Version = "3.1.0"
 
