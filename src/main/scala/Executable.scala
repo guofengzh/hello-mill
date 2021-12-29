@@ -1,5 +1,5 @@
 import scala.concurrent.{Future, ExecutionContext, Await}
-import scala.concurrent.duration._
+import scala.concurrent.duration.*
 import scala.language.postfixOps
 
 object Executable extends App {

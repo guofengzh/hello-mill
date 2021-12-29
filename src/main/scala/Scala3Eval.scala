@@ -8,7 +8,7 @@ object Scala3Eval extends App:
   
   type Env = Map[String, Int]
   
-  import Exp._
+  import Exp.*
   
   type WithEnv = Env ?=> Int
 
