@@ -86,6 +86,5 @@ val two2: +[贰, 零] = +.apply[贰, 零]
 val four: +[壹, 叁] = +.apply[壹, 叁]
 
 @main def traitInstTest: Unit = {
-    println(ltTest)
-    println("Done!")
+  println("Done!")
 }
