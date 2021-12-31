@@ -18,8 +18,9 @@ trait BetterFilesModule extends SbtModule {
     "-source:future",    // force future deprecation warnings.
     "-new-syntax",       // Require then and do in control expressions.
     "-indent",           // Together with -rewrite, remove {…} syntax when possible due to significant indentation.
+    "-rewrite",
     // "-Xsemanticdb",       // the Scala 3 compiler has built-in SemanticDB support. 
-    "-Xfatal-warnings" // Fail on warnings, not just errors
+    "-Xfatal-warnings"   // Fail on warnings, not just errors
   )
 
   object test extends Tests with TestModule.Junit4 {
