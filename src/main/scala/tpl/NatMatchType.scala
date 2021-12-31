@@ -1,3 +1,5 @@
+package tpl
+
 object NatMatchType {
   trait Nat
   class Zero extends Nat

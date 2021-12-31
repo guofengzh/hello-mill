@@ -18,8 +18,7 @@ trait BetterFilesModule extends SbtModule {
     "-source:future",    // force future deprecation warnings.
     "-new-syntax",       // Require then and do in control expressions.
     "-indent",           // Together with -rewrite, remove {…} syntax when possible due to significant indentation.
-    "-rewrite",
-    // "-Xsemanticdb",       // the Scala 3 compiler has built-in SemanticDB support. 
+    //"-Xsemanticdb",   // the Scala 3 compiler has built-in SemanticDB support. 
     "-Xfatal-warnings"   // Fail on warnings, not just errors
   )
 
@@ -33,4 +32,7 @@ trait BetterFilesModule extends SbtModule {
 
 object helloworld extends BetterFilesModule {
    def millSourcePath = build.millSourcePath
+   override def ivyDeps = Agg(
+      ivy"org.tpolecat::typename:1.0.0"
+    )
 }

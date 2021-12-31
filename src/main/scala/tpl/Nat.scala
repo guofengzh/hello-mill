@@ -1,3 +1,5 @@
+package tpl
+
 trait Nat
 class 零 extends Nat
 class Succ[A <: Nat] extends Nat
@@ -40,7 +42,7 @@ val lteTest = <=[叁, 叁]
 val lteTest2 = <=[叁, 伍]
 
 // ADD NUMBER AS TYPES v1
-object NotFigureOutResult {
+object NatNotFigureOutResult {
   trait +[A <: Nat, B <: Nat, S <: Nat]  // S denote the sum of A and B
   object + {
     // 0 + 0 = 0

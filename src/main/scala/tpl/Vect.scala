@@ -1,3 +1,5 @@
+package tpl
+
 object VectDemo:
   import NatMatchType.*
   sealed trait Vect[N <: Nat, +A]:
