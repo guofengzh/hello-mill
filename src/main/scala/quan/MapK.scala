@@ -28,7 +28,7 @@ object MapK {
   def apply[K[_], V[_]](pairs: KTuple2[K, V]#T*): MapK[K, V] = {
     val x: List[KTuple2[K, V]#T] = pairs.toList
     val y: List[(K[Any], V[Any])] = x.map(t => t.asInstanceOf[(K[Any], V[Any])])
-    new MapK(Map(y: _*))
+    new MapK(Map(y*))
   }
 }
 
