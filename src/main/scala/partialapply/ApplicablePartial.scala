@@ -15,4 +15,4 @@ def findApplicable[A] = new FindApplicablePartial[A]
 // And actually in this case since findApplicable itself doesn't care about type B 
 // (i.e. B doesn't have a context bound or other uses), you don't even need the 
 // intermediary class, but can use a wildcard/existential type instead:
-def findApplicable2[A](fn: A => _): fn.type = fn
+def findApplicable2[A](fn: A => ?): fn.type = fn
