@@ -1,4 +1,4 @@
-package quan
+package mapk
 
 type KTuple2[T1[_], T2[_]] = {
   type A

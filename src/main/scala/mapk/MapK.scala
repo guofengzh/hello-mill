@@ -1,4 +1,4 @@
-package quan
+package mapk
 
 class MapK[K[_], V[_]](rawMap: Map[K[Any], V[Any]]) {
   def apply[A](key: K[A]): V[A] = {

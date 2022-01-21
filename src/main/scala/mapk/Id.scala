@@ -1,4 +1,4 @@
-package quan
+package mapk
 
 type Id[A] = A
 
