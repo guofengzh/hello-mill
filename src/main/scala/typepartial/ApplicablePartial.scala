@@ -1,4 +1,4 @@
-package partialapply
+package typepartial
 
 // it seems like you want to do some kind of advanced partial type application. 
 // Usually you can achieve such an API by introducing an intermediary class. 

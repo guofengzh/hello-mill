@@ -1,4 +1,4 @@
-package partialapply
+package typepartial
 
 object Solution1 {
   // If at some point some call-site knows the types of arguments 
