@@ -1,6 +1,7 @@
 package typelowering
 
 object Solution1 {
+  
   trait ICounter {
     type T
     def start: T
