@@ -35,5 +35,5 @@ class DefiniteAssignment extends IDataFlow {
 
 class C
 {
-    def M(df: IDataFlow):Unit = {}
+    def m(df: IDataFlow):Unit = {}
 }
