@@ -13,7 +13,7 @@ package deps.pi
 type InputValue = Singleton & Int
 
 /**
- * 注意，注意，对象中有一个apply方法，这个对象就相当于一个函数了：obj（...）
+ * 注意，对象中有一个apply方法，这个对象就相当于一个函数了：obj(arg)
  */
 trait B[T] {
    def apply(x:T): T = x
