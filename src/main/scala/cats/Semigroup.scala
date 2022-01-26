@@ -25,7 +25,6 @@ given IntMonoid: Monoid[Int] with
   def unit: Int = 0
   extension (i: Int) infix def combine(other: Int): Int = i + other
 
-@main def semigroupMain: Unit = {
+@main def semigroupMain: Unit =
   val v = "2" <+> ("3" <+> "4")
   println(v)
-}
