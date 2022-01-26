@@ -1,3 +1,5 @@
+package cats
+
 import scala.annotation.targetName
 
 trait Semigroup[T]:

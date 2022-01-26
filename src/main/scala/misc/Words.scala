@@ -1,3 +1,5 @@
+package misc
+
 class Words(words: Seq[String], index: Int) extends Product:
   def _1 = words
   def _2 = index

@@ -1,3 +1,5 @@
+package misc
+
 object Tokenize:
   // def unapplySeq(s: String): Option[Seq[String]] = Some(tokenize(s))
   def unapplySeq(lim_s: (Int,String)): Option[Seq[String]] =

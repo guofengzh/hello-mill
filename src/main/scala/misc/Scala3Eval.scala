@@ -1,3 +1,5 @@
+package misc
+
 object Scala3Eval extends App:
 
   enum Exp:

@@ -1,4 +1,4 @@
-package pf
+package polyfunc
 
 def foo[A](a: A): List[A] = List(a)
 

@@ -1,5 +1,9 @@
 package singletontypes
 
+/**
+ * https://engineering.zalando.com/posts/2018/10/scala-three-experiment.html
+ */
+
 /*final case class Matrix(n: Int, m: Int) {
   def *(other: Matrix): Matrix = {
     require(m == other.n,

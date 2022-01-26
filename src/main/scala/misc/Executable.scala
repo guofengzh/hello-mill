@@ -1,3 +1,5 @@
+package misc
+
 import scala.concurrent.{Future, ExecutionContext, Await}
 import scala.concurrent.duration.*
 import scala.language.postfixOps

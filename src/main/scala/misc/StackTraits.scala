@@ -1,3 +1,4 @@
+package misc
 
 trait Observer[State]:
   def receiveUpdate(state: State): Unit
