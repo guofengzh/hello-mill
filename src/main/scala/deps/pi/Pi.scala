@@ -19,6 +19,10 @@ trait B[T] {
    def apply(x:T): T = x
 }
 
+object b0 extends B[Int]
+object b1 extends B[String]
+object b2 extends B[Boolean]
+
 type DepType [T <: InputValue] = T match
     case 0 => B[Int]
     case 1 => B[String]
@@ -40,18 +44,14 @@ case class DepProduct[T <: InputValue](x: T, y : DepType[T])
  *                             1 => "aaa"
  *                             2 => True)
  */
-object b0 extends B[Int]:
-    def apply() = this
-
 val pid0 = DepProduct(0, b0)
 
-object DepFunction {
-  def apply[N <: InputValue](x: N): DepType[N] = 
-     x match
-        case _: 0 => b0.asInstanceOf[DepType[N]]
-        case _: 1 => new B[String]{}.asInstanceOf[DepType[N]]
-        case _: Int   => new B[Boolean]{}.asInstanceOf[DepType[N]]
-}
+object DepFunction:
+  def apply[N <: InputValue](x: N): DepType[x.type] = 
+    x match
+      case 0 : 0 => b0
+      case 1 : 1 => b1
+      case _ : ? => b2
 
 val pi0 = DepFunction(0)
 val pi1 = DepFunction(1)
@@ -59,3 +59,5 @@ val pi2 = DepFunction(2)
 
 @main def PiMain: Unit = 
    println(pi0(5))
+   println(pi1("Hello"))
+   println(pi2(true))

@@ -2,6 +2,8 @@ package typematch
 
 /**
  * https://stackoverflow.com/questions/68687990/scala-3-a-match-type-could-not-be-fully-reduced-with-literal-types
+ * 
+ * https://dotty.epfl.ch/docs/reference/new-types/match-types.html
  */
 type TestMatchType[T] = T match
   case "String1" => Int
