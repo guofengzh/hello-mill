@@ -8,6 +8,11 @@ package deps.sigma
  * where the second type is dependent on the first value. 
  * 
  * Sigma [x:A] B(x) is the collection of pairs (x,y) for x:A and y:B(x).
+ * 
+ * Ref:
+ *   https://www.reddit.com/r/haskell/comments/pcxvu0/dependent_types_can_pi_types_be_usefully_thought/
+ *   https://typista.org/lean-for-scala-programmers-3/
+ *   https://medium.com/@Webmarmun/dependent-types-in-haskell-f35b8880cc16
  */
 type InputValue = Singleton & Int
 
