@@ -41,10 +41,14 @@ trait TripleTyp[Rdf <: RDF[Rdf]]:
 trait NodeTyp[Rdf <: RDF[Rdf]]:
   type Out
 
-/* 针对Graph、Triple和Node，通过给出given instance来绑定它们到具体实现Rdf4j上 */
+/* Rdf4j的实现*/
 trait Rdf4j extends RDF[Rdf4j] 
 
-/* 以下是Rdf4j的given instance */
+/*
+ * 针对Graph、Triple和Node，通过给出given instance来绑定它们到具体实现Rdf4j上  
+ *
+ * 以下是Rdf4j的given instance 
+ */
 object GraphTyp: 
   given GraphTyp[Rdf4j] with
     type Out = Model
