@@ -1,4 +1,4 @@
-package deps.imprecision
+package typeprojection
 
 /**
  * What does Dotty offer to replace type projections?
@@ -7,6 +7,7 @@ package deps.imprecision
  * In Scala 2.12 type projections sometimes can be replaced with type class + path-dependent types
  */
 
+ /*
 object BADCase:
 
   trait Contents
@@ -24,7 +25,7 @@ object BADCase:
     def createContainer(contents: ContentType): ContainerType
 
 end BADCase
-
+*/
 object Scala212:
 
   trait Contents

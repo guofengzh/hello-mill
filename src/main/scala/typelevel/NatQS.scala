@@ -1,5 +1,9 @@
-package tpl
+package typelevel
 
+/**
+ * Type-Level Programming in Scala 3, Part 2: A Quicksort on Types
+ * https://blog.rockthejvm.com/type-level-quicksort/
+ */
 trait HList
 class HNil extends HList
 class ::[H <: Nat, T <: HList] extends HList

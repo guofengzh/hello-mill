@@ -1,4 +1,4 @@
-package deps.imprecision
+package typeprojection
 
 object BAD:
 

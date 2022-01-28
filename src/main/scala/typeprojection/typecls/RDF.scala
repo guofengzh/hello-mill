@@ -1,4 +1,4 @@
-package typeproj.typecls
+package typeprojection.typecls
 
 /**
  * Dropped: General Type Projection

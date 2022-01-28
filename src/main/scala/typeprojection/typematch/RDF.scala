@@ -1,4 +1,4 @@
-package typeproj.typematch
+package typeprojection.typematch
 
 
 /**

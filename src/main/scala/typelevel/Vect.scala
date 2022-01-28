@@ -1,4 +1,4 @@
-package tpl
+package typelevel
 
 object VectDemo:
   import NatMatchType.*
