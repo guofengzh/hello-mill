@@ -27,29 +27,28 @@ trait <[A <: Nat, B <: Nat]
 given basic[B <: Nat]: <[零, Succ[B]]()
 given inductive[A <: Nat, B <: Nat](using lt: <[A, B]): <[Succ[A], Succ[B]]()
 
-object < {
+object < :
   given basic[B <: Nat]: <[零, Succ[B]]()
   given inductive[A <: Nat, B <: Nat](using lt: <[A, B]): <[Succ[A], Succ[B]]()
   def apply[A <: Nat, B <: Nat](using lt: <[A, B]) = lt
-}
 
 val ltTest = <[叁, 伍]
 lazy val ltTest2: <[叁, 伍] = ???
 
 trait <=[A <: Nat, B <: Nat]
-object <= {
+object <= :
   given lteBasic[B <: Nat]: <=[零, B]()
   given inductive[A <: Nat, B <: Nat](using lte: <=[A, B]): <=[Succ[A], Succ[B]]()
   def apply[A <: Nat, B <: Nat](using lte: <=[A, B]) = lte
-}
+end <=
 
 val lteTest = <=[叁, 叁]
 val lteTest2 = <=[叁, 伍]
 
 // ADD NUMBER AS TYPES v1
-object NatNotFigureOutResult {
+object NatNotFigureOutResult:
   trait +[A <: Nat, B <: Nat, S <: Nat]  // S denote the sum of A and B
-  object + {
+  object + :
     // 0 + 0 = 0
     given zero: +[零, 零, 零]()
     // for every A <: Nat and A > 0, we have A + 0 = A and 0 + A = A
@@ -58,7 +57,7 @@ object NatNotFigureOutResult {
     // if A + B = S, then Succ[A] + Succ[B] = Succ[Succ[S]]
     given inductive[A <: Nat, B <: Nat, S <: Nat](using plus: +[A, B, S]): +[Succ[A], Succ[B], Succ[Succ[S]]]()
     def apply[A <: Nat, B <: Nat, S <: Nat](using plus: +[A, B, S]) = plus
-  }
+  end +
 
   val zero: +[零, 零, 零] = +.apply[零, 零, 零]
   val two: +[零, 贰, 贰] = +.apply[零, 贰, 贰]
@@ -70,11 +69,11 @@ object NatNotFigureOutResult {
     - the compiler can run basicRight to construct a +[壹, 贰, 贰] (Note: the compiler can check  < 贰)
   */
   // val invalidFour: +[贰, 叁, 肆] = +.apply[贰, 叁, 肆]
-}
+end NatNotFigureOutResult
 
 // ADD NUMBER AS TYPES v2
 trait +[A <: Nat, B <: Nat] { type Result <: Nat} // Result denote the sum of A and B
-object + {
+object + :
   type Plus[A <: Nat, B <: Nat, S <: Nat] = +[A,B] {type Result = S}
   // 0 + 0 = 0
   given zero: Plus[零, 零, 零] = new +[零, 零] { type Result = 零}
@@ -86,12 +85,12 @@ object + {
      new +[Succ[A], Succ[B]] { type Result = Succ[Succ[S]]}
   // def apply[A <: Nat, B <: Nat](using plus: +[A, B]) = plus
   def apply[A <: Nat, B <: Nat](using plus: +[A, B]): Plus[A, B, plus.Result] = plus
-}
+end +
+
 val zero: +[零, 零] = +.apply[零, 零]
 val two: +[零, 贰] = +.apply[零, 贰]
 val two2: +[贰, 零] = +.apply[贰, 零]
 val four: +[壹, 叁] = +.apply[壹, 叁]
 
-@main def traitInstTest: Unit = {
+@main def traitInstTest: Unit =
   println("Done!")
-}
