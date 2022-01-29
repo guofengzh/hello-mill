@@ -1,4 +1,4 @@
-package typelevel.evidence
+package typelevel.evidence.dependent
 
 /**
  * https://gist.github.com/ragb/cb087d1befc85fc695decc38566fec28
@@ -62,8 +62,8 @@ def stepTwo =
   // Ask the compiler when in dobt
   summon[Plus.Aux[Two, Three, Five]]
 
-  summon[Plus[Three, Three]]
-  summon[Plus[Two, Five]]
+  //summon[Plus[Three, Three]]
+  //summon[Plus[Two, Five]]
 
 
 // 我们以同样的方法定义乘
@@ -92,23 +92,28 @@ def stepThree =
   summon[Prod.Aux[Two, Two, Four]]
 
 // Tells that Factoria[N] = Out
-trait Factorial[N <: Nat]:
+trait Factorial[N <: Nat] {
   type Out <: Nat
+}
 
-object Factorial:
+object Factorial {
   type Aux[N <: Nat, Out0 <: Nat] = Factorial[N] {type Out = Out0}
 
-  // Factorial[0] = 1
-  given factorialZero: Factorial.Aux[Zero, One] = new Factorial[Zero] { type Out = One}
-  // Factorial(n+1) = (n + 1) * Factorial(N)
-  given FactorialSuc[N <: Nat, F <: Nat, F1 <: Nat](
-    using factN: Factorial.Aux[N, F1], // Factorial(N) = F1
-    prod: Prod.Aux[Suc[N], F1, F]) /* (n + 1) * F1 = F */ : Factorial.Aux[Suc[N], F] // Factorial(N + 1) = F
-        = new Factorial[Suc[N]] { type Out = F}
-
+// Factorial[0] = 1
+  implicit val factorialZero: Factorial.Aux[Zero, One] = new Factorial[Zero] { type Out = One}
+// Factorial(n+1) = (n + 1) * Factorial(N)
+  implicit def FactorialSuc[N <: Nat, F <: Nat, F1 <: Nat](
+    implicit factN: Factorial.Aux[N, F1], // Factorial(N) = F1
+    prod: Prod.Aux[Suc[N], F1, F]) // (n + 1) * F1 = F
+      : Factorial.Aux[Suc[N], F] // Factorial(N + 1) = F
+          = new Factorial[Suc[N]] { type Out = F}
   def apply[N <: Nat](implicit factorial: Factorial[N]) = factorial
+}
 
-def stepFour = 
+def stepFour = {
+
   summon[Factorial.Aux[Zero, One]]
   //summon[Factorial.Aux[Three, Six]]
+
   //Factorial[Four]
+}

@@ -1,4 +1,4 @@
-package typelevel.evidence
+package typelevel.evidence.dependent
 
 // Converts a type-level natural number to an integer (runtime)
 trait ToInt[N <: Nat]:
