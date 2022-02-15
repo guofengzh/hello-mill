@@ -1,5 +1,8 @@
 package DOT
 
+/**
+ * https://infoscience.epfl.ch/record/215280/files/paper_1.pdf
+ */
 object scala_collection_immutable:
   sci =>
     trait List:
