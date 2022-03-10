@@ -18,7 +18,8 @@ trait BetterFilesModule extends SbtModule {
     "-source:future",    // force future deprecation warnings.
     "-new-syntax",       // Require then and do in control expressions.
     "-indent",           // Together with -rewrite, remove {…} syntax when possible due to significant indentation.
-    //"-Xsemanticdb",   // the Scala 3 compiler has built-in SemanticDB support. 
+    //"-Xsemanticdb",    // the Scala 3 compiler has built-in SemanticDB support. 
+    //"-Xcheck-macros",  // Additional check useful during development
     "-Xfatal-warnings"   // Fail on warnings, not just errors
   )
 
