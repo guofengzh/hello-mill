@@ -18,10 +18,15 @@ trait BetterFilesModule extends SbtModule {
     "-source:future",    // force future deprecation warnings.
     "-new-syntax",       // Require then and do in control expressions.
     "-indent",           // Together with -rewrite, remove {…} syntax when possible due to significant indentation.
-    //"-Xsemanticdb",    // the Scala 3 compiler has built-in SemanticDB support. 
+    "-Xsemanticdb",    // the Scala 3 compiler has built-in SemanticDB support. 
     //"-Xcheck-macros",  // Additional check useful during development
     "-Xfatal-warnings"   // Fail on warnings, not just errors
   )
+
+  // ERROR code navigation does not work for the file 
+  // '/home/gfzhang/hello-mill/src/main/scala/marcos/statements/PreparedStatementTest.scala' 
+  // because the SemanticDB file '/home/gfzhang/hello-mill/.bloop/out/helloworld/bloop-bsp-clients-classes/classes-Metals---UuUnb9S-Wo4R7wJJGuLg==/META-INF/semanticdb/src/main/scala/marcos/statements/PreparedStatementTest.scala.semanticdb' 
+  // doesn't exist. --- fix it using -Xsemanticdb to generate the SemanticDB file '/home/gfzhang/hello-mill/.bloop/out'.
 
   object test extends Tests with TestModule.Junit4 {
     override def ivyDeps = Agg(

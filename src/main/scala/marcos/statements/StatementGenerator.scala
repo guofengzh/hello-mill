@@ -56,6 +56,11 @@ class StatementGenerator(using Quotes) {
     // Parameter 'a' captures the type and $name expression repesenting the name argument of the contructor.
     columnDefTerm.asExprOf[ColDef[?]] match {
 
+      // for $name, a similliar example is the $msg in the following codes:
+      //   val msg = Expr("Hello")
+      //   val printHello = '{ print($msg) }
+      // 
+      // the following case pattern-matches against the ColDef construction.
       case '{ ColDef[a]($name) } =>
         val paramType = TypeRepr.of[a]
 
@@ -129,8 +134,10 @@ class StatementGenerator(using Quotes) {
 
     // As the types was verified, unsafe statement can be safefy created and passed to the
     // Prepared statemnt cont
+    // 
+    // then we generate the code to create the prepared statement.
     '{
-      new PreparedStatement[CallArgs[A]](UsafeStatement($sql))
+      new PreparedStatement[CallArgs[A]](UnsafeStatement($sql))
     }.asExprOf[PreparedStatement[CallArgs[A]]]
   }
 }

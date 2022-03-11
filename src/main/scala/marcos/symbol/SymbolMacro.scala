@@ -44,3 +44,16 @@ object Symbols {
 
   inline def printSymbols() : Function0[Unit] = ${ printSymbolsImpl }
 }
+
+// Get enclosing module
+// https://stackoverflow.com/questions/69450459/get-enclosing-module-in-scala-3-macros
+
+object SomeMacro:
+  inline def macroCall(s: String): String = ${macroCallImpl('s)}
+
+  def macroCallImpl(s: Expr[String])(using Quotes): Expr[String] =
+    import quotes.reflect.*
+    def enclosingClass(symb: Symbol): Symbol = 
+      if symb.isClassDef then symb else enclosingClass(symb.owner)
+    val name = enclosingClass(Symbol.spliceOwner).fullName
+    Literal(StringConstant(name)).asExprOf[String]
