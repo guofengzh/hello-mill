@@ -19,7 +19,7 @@ type InputValue = Singleton & Int
 type DepType [T <: InputValue] = T match
     case 0 => Int
     case 1 => String
-    case ? => Boolean
+    case AnyVal => Boolean
 
 /*
  * data DepPair : (a : Type) -> (P : a -> Type) -> Type where

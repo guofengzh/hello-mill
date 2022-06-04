@@ -15,7 +15,7 @@ type Remove[T <: Tuple, X] <: Tuple = T match {
   case EmptyTuple => EmptyTuple
   case head *: tail => head match {
     case X => tail
-    case ? => head *: Remove[tail, X]
+    case Any => head *: Remove[tail, X]
   }
 }
 

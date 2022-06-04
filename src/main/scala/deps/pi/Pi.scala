@@ -31,7 +31,7 @@ object b2 extends B[Boolean]
 type DepType [T <: InputValue] = T match
     case 0 => B[Int]
     case 1 => B[String]
-    case ? => B[Boolean]
+    case AnyVal => B[Boolean] // https://dotty.epfl.ch/docs/reference/new-types/match-types.html
 
 /*
  * data DepProduct : (a : Type) -> (P : a -> Type) -> Type where
@@ -56,7 +56,7 @@ object DepFunction:
     x match
       case 0 : 0 => b0
       case 1 : 1 => b1
-      case _ : ? => b2
+      case _ : AnyVal => b2 // https://dotty.epfl.ch/docs/reference/new-types/match-types.html#dependent-typing
 
 val pi0 = DepFunction(0)
 val pi1 = DepFunction(1)

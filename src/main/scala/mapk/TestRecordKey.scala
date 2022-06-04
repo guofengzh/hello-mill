@@ -56,7 +56,7 @@ object TestRecordKey {
 
       recMap.foreach { (k, v) =>
          doSomething(k, v)
-         doSomething(k, k.default)
+         // doSomething(k, k.default) TODO
       }
    }
 
