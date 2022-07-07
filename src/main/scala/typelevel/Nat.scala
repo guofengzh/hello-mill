@@ -27,7 +27,7 @@ trait <[A <: Nat, B <: Nat]
 given basic[B <: Nat]: <[零, Succ[B]]()
 given inductive[A <: Nat, B <: Nat](using lt: <[A, B]): <[Succ[A], Succ[B]]()
 
-object < :
+object `<` :  // `:` after symbolic operator is deprecated; use backticks around operator insteadbloop
   given basic[B <: Nat]: <[零, Succ[B]]()
   given inductive[A <: Nat, B <: Nat](using lt: <[A, B]): <[Succ[A], Succ[B]]()
   def apply[A <: Nat, B <: Nat](using lt: <[A, B]) = lt
@@ -36,7 +36,7 @@ val ltTest = <[叁, 伍]
 lazy val ltTest2: <[叁, 伍] = ???
 
 trait <=[A <: Nat, B <: Nat]
-object <= :
+object `<=` :
   given lteBasic[B <: Nat]: <=[零, B]()
   given inductive[A <: Nat, B <: Nat](using lte: <=[A, B]): <=[Succ[A], Succ[B]]()
   def apply[A <: Nat, B <: Nat](using lte: <=[A, B]) = lte
@@ -48,7 +48,7 @@ val lteTest2 = <=[叁, 伍]
 // ADD NUMBER AS TYPES v1
 object NatNotFigureOutResult:
   trait +[A <: Nat, B <: Nat, S <: Nat]  // S denote the sum of A and B
-  object + :
+  object `+` :
     // 0 + 0 = 0
     given zero: +[零, 零, 零]()
     // for every A <: Nat and A > 0, we have A + 0 = A and 0 + A = A
@@ -73,7 +73,7 @@ end NatNotFigureOutResult
 
 // ADD NUMBER AS TYPES v2
 trait +[A <: Nat, B <: Nat] { type Result <: Nat} // Result denote the sum of A and B
-object + :
+object `+` :
   type Plus[A <: Nat, B <: Nat, S <: Nat] = +[A,B] {type Result = S}
   // 0 + 0 = 0
   given zero: Plus[零, 零, 零] = new +[零, 零] { type Result = 零}
