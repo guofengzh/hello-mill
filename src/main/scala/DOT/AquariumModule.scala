@@ -9,6 +9,14 @@ object AquariumModule {
         val fish : List [ Fish ]
     }
 
+    // the type Fish is path dependent, i.e. specific to the run-time Aquarium object that
+    // the fish belongs to. This allows the addFish method to guarantee at
+    // compile time that an aquarium a accepts only fish of type a.Fish.
+    // 
+    // DOT, so we should consider the "O", that is, "a" in a.Fish
+    // NOTE: path-dependent type, where type depends on value, 
+    //       dependent-object type, where type depdens on object, we encode type in the value, 
+    //       that is, "object"
     def addFish(a: Aquarium, f: a.Fish) =
         new Aquarium {
             type Fish = a.Fish
