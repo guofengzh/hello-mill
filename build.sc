@@ -13,9 +13,11 @@ trait BetterFilesModule extends SbtModule {
     "-unchecked",  // Enable additional warnings where generated code depends on assumptions.
     "-deprecation",      // Emit warning and location for usages of deprecated APIs.
     "-explain",          // Explain errors in more detail.
+    "-explain-types"
     "-encoding", "utf8", // Specify character encoding used by source files.
     "-feature",          // Emit warning and location for usages of features that should be imported explicitly.
     "-source:future",    // force future deprecation warnings.
+    "-rewrite",
     "-new-syntax",       // Require then and do in control expressions.
     "-indent",           // Together with -rewrite, remove {…} syntax when possible due to significant indentation.
     "-Xsemanticdb",    // the Scala 3 compiler has built-in SemanticDB support. 
