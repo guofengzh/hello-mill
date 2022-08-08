@@ -1,3 +1,5 @@
+package typelevel
+
 object BoolTypeLevel {
 
   sealed trait Bool {
@@ -24,10 +26,10 @@ object BoolTypeLevel {
     type IfElse [C, T <: C, F <: C] = F
   }
 
-  implicitly[False# Not =:= True]
-  implicitly[False# && [True] =:= False]
-  implicitly[False# || [True] =:= True]
-  implicitly[False# IfElse[Any, Int, String] =:= String]
+  summon[False# Not =:= True]
+  summon[False# && [True] =:= False]
+  summon[False# || [True] =:= True]
+  summon[False# IfElse[Any, Int, String] =:= String]
 //  implicitly[True# IfElse[Any, Int, String] =:= String] // This does not compile!
 
 }

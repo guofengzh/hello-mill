@@ -15,8 +15,8 @@ package singletontypes
 type Dim = Singleton & Int
 
 final case class Matrix[A <: Dim, B <: Dim](n: A, m: B):
-  def *[C <: Dim](other: Matrix[B, C]): Matrix[A, C] =
-    Matrix(n, other.m)
+  def *[C <: Dim](rhs: Matrix[B, C]): Matrix[A, C] =
+    Matrix(n, rhs.m)
 
 @main def TestMatrix : Unit =
   val a = Matrix(2, 4) ;
