@@ -22,18 +22,15 @@ class C
 /**
  * Solution
  */
-trait IDataFlow {
+trait IDataFlow:
   type TLocalState
-}
 
 trait BitVector
 
 // Now only the implementer need to know the existence of the type TLocalState
-class DefiniteAssignment extends IDataFlow {
+class DefiniteAssignment extends IDataFlow:
     type TLocalState = BitVector
-}
 
 class C
-{
+:
     def m(df: IDataFlow):Unit = {}
-}

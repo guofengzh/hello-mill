@@ -12,17 +12,15 @@ package prolog
   *
   * [1] https://www.cs.unc.edu/~lazebnik/fall10/assignment3.html
   */
-  class VariableStandarization(var idx: Int = 0) {
+  class VariableStandarization(var idx: Int = 0):
 
-  def standarizeAppart(clause: Clause): Clause = {
+  def standarizeAppart(clause: Clause): Clause =
     next
-    clause match {
+    clause match
       case Clause(Predicate(functor, body), terms) => Clause(
         Predicate(functor, standarize(body)),
         standarize(terms).map(_.asInstanceOf[Predicate])
       )
-    }
-  }
 
   def standarize(terms: List[Term]): List[Term] =
     terms.map {
@@ -37,4 +35,3 @@ package prolog
    */
   def next: Unit = idx += 1
 
-}

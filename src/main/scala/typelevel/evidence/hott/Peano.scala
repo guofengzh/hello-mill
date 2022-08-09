@@ -89,13 +89,12 @@ object Proof extends NatInductionPrinciple[NatPlusZeroEqualsNat]:
         trivialLemma[i]
       definitionalEquality.andThen(liftPreviousStep)
 
-def demoNat(): Unit = {
+def demoNat(): Unit =
   println("Running demoNat...")
   type two = S[S[O]]
   val ev = Proof[two]
   val twoInstance: two = new S[S[O]]
   println(ev(twoInstance) == twoInstance)
-}
 
 /* It compiles, runs, and prints:
  *    true

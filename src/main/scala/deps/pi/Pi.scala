@@ -20,9 +20,8 @@ type InputValue = Singleton & Int
 /**
  * 注意，对象中有一个apply方法，这个对象就相当于一个函数了：obj(arg)
  */
-trait B[T] {
+trait B[T]:
    def apply(x:T): T = x
-}
 
 object b0 extends B[Int]
 object b1 extends B[String]

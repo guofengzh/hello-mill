@@ -15,12 +15,10 @@ package logic
 
 trait B { self =>
   def apply[X](thenCase: X, elseCase: X): X
-  def |(other: B): B = new B { 
+  def |(other: B): B = new B: 
     def apply[A](t: A, e: A) = self(True, other)(t, e) 
-  }
-  def &(other: B): B = new B { 
+  def &(other: B): B = new B: 
     def apply[A](t: A, e: A) = self(other, False)(t, e) 
-  }
   def unary_~ : B = self(False, True)
 }
 

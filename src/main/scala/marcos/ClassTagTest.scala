@@ -8,11 +8,11 @@ package marcos
 import scala.quoted.*
 import scala.reflect.ClassTag
 
-trait ClassTagTest {
-  def getClassTag[T](using Type[T], Quotes): Expr[ClassTag[T]] = {
+trait ClassTagTest:
+  def getClassTag[T](using Type[T], Quotes): Expr[ClassTag[T]] =
     import quotes.reflect.*
 
-    Expr.summon[ClassTag[T]] match {
+    Expr.summon[ClassTag[T]] match
       case Some(ct) =>
         ct
       case None =>
@@ -21,6 +21,3 @@ trait ClassTagTest {
           Position.ofMacroExpansion
         )
         throw new Exception("Error when applying macro")
-    }
-  }
-}

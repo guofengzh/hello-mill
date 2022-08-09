@@ -1,23 +1,21 @@
 package macros.statements
 
 // All supported database column types, in this example limited to String and Int.
-enum DbType {
+enum DbType:
   case DbInt
   case DbString
-}
 
 // Auxiliary class to keep parsed column information.
 case class ColumnInfo(val dbType: DbType, name: String)
 
 // Very simple parser just to work with the example. Programmer perfection assumed - no errors in sql script.
-object SqlParser {
-  def parse(path: String): Map[String, Seq[ColumnInfo]] = {
+object SqlParser:
+  def parse(path: String): Map[String, Seq[ColumnInfo]] =
     val content = scala.io.Source.fromFile(path).mkString
     val statements = content.split(";")
     statements.map(parseStatement).toMap
-  }
 
-  private def parseStatement(statement: String) ={
+  private def parseStatement(statement: String) =
     val splatStatement = statement.split("[\\s,:]").filterNot(_.isBlank).map(_.toLowerCase)
     println(splatStatement.mkString(","))
     val tableName = splatStatement(2)
@@ -28,15 +26,11 @@ object SqlParser {
       .toSeq
 
     tableName -> colInfo
-  }
 
-  private def typeByName(name: String) = {
-    if(name == "int") then {
+  private def typeByName(name: String) =
+    if(name == "int") then
       DbType.DbInt
-    } else if(name.startsWith("varchar")) then {
+    else if(name.startsWith("varchar")) then
       DbType.DbString
-    } else {
+    else
       throw RuntimeException("Sql parsing error, wrong type: " + name)
-    }
-  }
-}

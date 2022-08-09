@@ -37,13 +37,12 @@ case class Variable(name: String) extends Term
  *   parent(sam, joana).
  *   parent(peter, maria).
  */
-case class Predicate(functor: String, terms: List[Term]) extends Term {
+case class Predicate(functor: String, terms: List[Term]) extends Term:
  
   def arity: Int = terms.size
  
   infix def matches(other: Predicate): Boolean = other.functor == functor && other.arity == arity
  
-}
  
 /**
  * Rules in Prolog equate Horn- Clauses in First Order Logic: y <- x AND y AND z.
@@ -66,7 +65,7 @@ case class Clause(head: Predicate, body: List[Predicate])
 /**
  * add an easy way to handle lists. Especially to create lists in the binary tree form.
  */
-object ListBuilder {
+object ListBuilder:
 
   /**
    * a special predicate name for all list elements '.'.
@@ -94,9 +93,7 @@ object ListBuilder {
     if(x.isEmpty) then End
     else Predicate(ListFunctor, List(x.head, binary(x.tail)))
 
-  def flatten(x: Predicate): List[Term] = (x: @unchecked) match {
+  def flatten(x: Predicate): List[Term] = (x: @unchecked) match
     case Predicate(_, List(h, End)) => List(h)
     case Predicate(_, List(h, tail)) => h :: flatten(tail.asInstanceOf[Predicate])
-   }
 
-}

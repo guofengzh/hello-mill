@@ -11,7 +11,7 @@ import scala.collection.mutable
   * [1] Stuart Russel, Peter Norvig: "Artificial Intelligence a Modern Approach", Pearson, 2011
   *
   */
-class KnowledgeBase(val program: mutable.Queue[Clause]) {
+class KnowledgeBase(val program: mutable.Queue[Clause]):
 
   def index = program.groupBy(clause => clause.head.functor).map {
     case (idx, clauses) => idx -> clauses.toList
@@ -25,10 +25,8 @@ class KnowledgeBase(val program: mutable.Queue[Clause]) {
 
   infix def ask(goal: List[Predicate]) = Inference(index).inferAll(goal)
 
-}
 
-object KnowledgeBase {
+object KnowledgeBase:
 
   def apply(): KnowledgeBase = new KnowledgeBase(mutable.Queue.empty)
   
-}

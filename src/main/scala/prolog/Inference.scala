@@ -22,35 +22,31 @@ package prolog
 
 import scala.collection.mutable;
 
-class Inference(standarizer: VariableStandarization, program: Map[String, List[Clause]]) {
+class Inference(standarizer: VariableStandarization, program: Map[String, List[Clause]]):
 
   import Unification.*
   import Inference.*
 
-  def inferAll(goals: List[Predicate]): Solutions = {
+  def inferAll(goals: List[Predicate]): Solutions =
     val x = inferAll(goals, Map.empty[Variable, Term])
     x.map(solution => assign(goals, solution))
-  }
 
   protected def inferAll(goals: List[Predicate], solution: Substitution): Solutions =
     if(goals.isEmpty) then List(solution)
-    else {
+    else
       val goal   = goals.head
       val other  = goals.tail
-      val answer = for (clause <- program(goal.functor)) yield {
+      val answer = for (clause <- program(goal.functor)) yield
         val Clause(standarizedHead, standarizedBody) = standarizer.standarizeAppart(clause)
         val substitution = mutable.Map.empty[Variable, Term] ++ solution
         val unifyable    = unify(goal, standarizedHead, substitution)
-        if(unifyable) then {
+        if(unifyable) then
           val newGoals = substitute(standarizedBody ::: other, substitution.toMap)
           val x = inferAll(newGoals.collect{case x: Predicate => x}, substitution.toMap)
           x
-        } else Nil
-      }
+        else Nil
       answer.flatten
-    }
 
-}
 
 /**
  * The search algorithm that finds all solutions is a depth first search algorithm with backtracking.
@@ -64,7 +60,7 @@ class Inference(standarizer: VariableStandarization, program: Map[String, List[C
  * that can be applied will be performed.  The search continues recursively with the new goal list. 
  * The algorithm returns a list of assignments to the variables in the query.
  */
-object Inference {
+object Inference:
 
   type Substitution = Map[Variable, Term]
 
@@ -81,27 +77,23 @@ object Inference {
    * from the result list. Since we renamed them multiple times, we have to find a path from 
    * the original variable name to a term that is not a variable.
    */
-  def assign(predicate: List[Predicate], substitution: Substitution): Substitution = {
+  def assign(predicate: List[Predicate], substitution: Substitution): Substitution =
     val variables: List[Variable] = predicate.flatMap {
       case Predicate(_, body) => body.flatMap(getAllVariables)
     }.distinct
     variables.map(
       x => x -> findAssignment(x, substitution)
     ).toMap
-  }
 
-  def getAllVariables(term: Term): List[Variable] = term match {
+  def getAllVariables(term: Term): List[Variable] = term match
     case x: Atom[?]         => List.empty
     case x: Variable        => List(x)
     case Predicate(_, body) => body.flatMap(getAllVariables)
-  }
 
-  def findAssignment(x: Term, substitution: Substitution): Term = x match {
+  def findAssignment(x: Term, substitution: Substitution): Term = x match
     case x: Variable => findAssignment(substitution(x), substitution)
     case Predicate(functor, body) => Predicate(functor, body.map(x => findAssignment(x, substitution)))
     case x => x
-  }
 
   def apply(program: Map[String, List[Clause]]): Inference = new Inference(new VariableStandarization, program)
   
-}

@@ -92,11 +92,10 @@ def stepThree =
   summon[Prod.Aux[Two, Two, Four]]
 
 // Tells that Factoria[N] = Out
-trait Factorial[N <: Nat] {
+trait Factorial[N <: Nat]:
   type Out <: Nat
-}
 
-object Factorial {
+object Factorial:
   type Aux[N <: Nat, Out0 <: Nat] = Factorial[N] {type Out = Out0}
 
 // Factorial[0] = 1
@@ -108,7 +107,6 @@ object Factorial {
       : Factorial.Aux[Suc[N], F] // Factorial(N + 1) = F
           = new Factorial[Suc[N]] { type Out = F}
   def apply[N <: Nat](implicit factorial: Factorial[N]) = factorial
-}
 
 def stepFour = {
 

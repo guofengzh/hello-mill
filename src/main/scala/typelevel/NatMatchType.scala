@@ -30,3 +30,4 @@ object NatMatchType:
     summon[Plus[One, Two] =:= Three]
     summon[Minus[Two, One] =:= One]
     summon[Multiply[Two, Three] =:= Six]
+end NatMatchType

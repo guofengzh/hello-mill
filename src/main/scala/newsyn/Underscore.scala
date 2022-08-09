@@ -4,7 +4,7 @@ package newsyn
  * Scala 3: The _, They Are a’Changing
  * https://medium.com/scala-3/scala-3-the-they-are-achanging-32b1ebb90fa2
  */
-object Underscore {
+object Underscore:
 
   /*
    * the underscore is used for placeholders in function arguments, 
@@ -16,11 +16,10 @@ object Underscore {
 
   // Match placeholder: _ in the first two case clauses
   Seq(Seq('a', 'b', 'c'), Seq(1, 2, 3), Seq(1.1, 2.2)).map { 
-    seq => seq match { 
+    seq => seq match 
       case 'a' +: _ => "Found a"
       case head +: _ +: last +: _ => s"Found $head and $last"
       case head +: tail => s"Other list: $seq"
-    }
   } 
   
   // for comprehension
@@ -54,17 +53,15 @@ object Underscore {
   count(seq)          // Returns 1!
   count(seq*)         // Returns 3. Use seq* instead of seq: _*
 
-  Seq('a', 'b', 'c', 'd', 'e') match {
+  Seq('a', 'b', 'c', 'd', 'e') match
     // tail* means zero or more elements of the sequence
     case Seq('a', tail*) => s"Found a, $tail"   // Instead of Seq('a', tail: _*)
     // placeholder _ make us not give a name, and also to ignore them
     case Seq('b', _*) => "Found b"              // Instead of Seq('a', _: _*)
     case seq => s"Other list: $seq"
-  }
 
   // '_': when we want to refer to a specific term/name, we will '_', 
   //      if we want to refer to any term, we use "*".
-}
 
 // see given instance
 // https://docs.scala-lang.org/scala3/reference/contextual/givens.html

@@ -9,7 +9,7 @@ import scala.quoted.*
 object TypeInfo {
   inline def apply[T[_]]: String = ${ typeInfoImpl[T] }
 
-  def typeInfoImpl[T[_]](using qctx: Quotes, tpe: Type[T]): Expr[String] = {
+  def typeInfoImpl[T[_]](using qctx: Quotes, tpe: Type[T]): Expr[String] =
     import qctx.reflect.*
 
     val tpe = TypeRepr.of[T]
@@ -33,15 +33,13 @@ object TypeInfo {
 
     val caseFields = tpe.typeSymbol.caseFields.map { s =>
       val name = s.name
-      val tpe = s.tree match {
+      val tpe = s.tree match
         case v: ValDef =>
           fullTypeName(v.tpt.tpe)
-      }
       s"$name: $tpe"
     }
 
     Expr(
       s"$name(${caseFields.mkString(",")})"
     )
-  }
 }

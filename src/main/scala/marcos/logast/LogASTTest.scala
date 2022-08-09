@@ -1,6 +1,6 @@
 package macros.logast
 
-@main def logASTTest(): Unit = {
+@main def logASTTest(): Unit =
 
   class A
 
@@ -8,4 +8,3 @@ package macros.logast
   val a: A = logAST {
     new A
   }  
-}

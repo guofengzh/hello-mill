@@ -4,7 +4,7 @@ package DOT
  * 
  * Virtual Types can model Type Parameters: List[T]
  */
-object VirtualType {
+object VirtualType:
   trait List { self =>
     type T
     def isEmpty: Boolean
@@ -27,12 +27,11 @@ object VirtualType {
           def head = hd
           def tail = tl
       }
-}
 
 /**
  * Encoding Covariance: Covariant Lists
  */
-object Covariance {
+object Covariance:
   trait List { self =>
     type T
     def isEmpty: Boolean
@@ -55,7 +54,6 @@ object Covariance {
           def head = hd
           def tail = tl
       }
-}
 
 /**
  * Polymorphic functions can be modeled as dependent functions.

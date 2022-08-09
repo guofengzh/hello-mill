@@ -8,20 +8,18 @@ package typelowering
  * an encoding of universal types.
  */ 
 trait ICounter[T]
-{
+:
     def start: T
     def next(current: T): T
     def done(current: T): Boolean 
-}
 
 class Counter extends ICounter[Int] with ICounterWrapper
-{
+:
     def start = 0
     def next(current: Int) = current + 1
     def done(current: Int) = current == 42;
     def unwrap[TWitness <: ICounterWitness](witness: TWitness): Unit = 
         witness.invoke(this)  // Here the T in ICounterWitness.invoke[T] is inferenced
-}
 /*---------------The above is the codes by the implementer-----------------------*/
 
 /* ----------- the two "intermediate" interfaces -----------*/
@@ -30,9 +28,8 @@ class Counter extends ICounter[Int] with ICounterWrapper
    universal type production. Now T is scoped in ICounterWitness.
 */
 trait ICounterWrapper
-{
+:
     def unwrap[TWitness <: ICounterWitness](w: TWitness): Unit
-}
 
 /**
  * this trai is the bridge between the implementer and the customer. the imlementer hides 
@@ -45,27 +42,18 @@ trait ICounterWrapper
  * on the customer code.
  */
 trait ICounterWitness
-{
+:
     def invoke[T](counter: ICounter[T]): Unit
-}
 
 /* ------------ The is the customer codes --------*/
 class MWitness extends ICounterWitness
-{
+:
     def invoke[T](ic: ICounter[T]): Unit = 
-    {
         var x = ic.start;
         while (!ic.done(x)) do
-        {
             x = ic.next(x);
-        }
-    }
-}
 
 class Cc
-{
+:
     def m(wrapper: ICounterWrapper): Unit =
-    {
         wrapper.unwrap(new MWitness()); // tell wrapper what the customer codes are
-    }
-}

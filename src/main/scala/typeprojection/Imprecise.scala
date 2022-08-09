@@ -139,15 +139,13 @@ object GoodSolution2:  //  add a type member to Feature
 end GoodSolution2
 
 
-trait Foo[In] {
+trait Foo[In]:
   type Out
   def f(v: In): Out
-}
 
-implicit val preciseFooInt: Foo[Int] { type Out = String } = new Foo[Int] {
+implicit val preciseFooInt: Foo[Int] { type Out = String } = new Foo[Int]:
   type Out = String
   def f(v: Int): String = v.toString
-}
 
 val ev: Foo[Int] { type Out = String}= preciseFooInt
 

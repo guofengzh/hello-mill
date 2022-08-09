@@ -9,9 +9,9 @@ package macros.symbol
 import scala.quoted.*
 
 // Example to use symbols.
-object Symbols {
+object Symbols:
   
-  def printSymbolsImpl(using q: Quotes) : Expr[Function0[Unit]] = {
+  def printSymbolsImpl(using q: Quotes) : Expr[Function0[Unit]] =
     import quotes.reflect.*
 
     val owner = Expr(Symbol.spliceOwner.name)
@@ -40,10 +40,8 @@ object Symbols {
     // The DefDef will not evaluate to Expr (call to isExpr of this term returns false) so it needs to be
     // included into the AST below. It was found with use of logAST on an empty function.
     Block(List(functionDef), Closure(Ref(functionDefSymbol), None)).asExprOf[Function0[Unit]]  
-  }
 
   inline def printSymbols() : Function0[Unit] = ${ printSymbolsImpl }
-}
 
 // Get enclosing module
 // https://stackoverflow.com/questions/69450459/get-enclosing-module-in-scala-3-macros

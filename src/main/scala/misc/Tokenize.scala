@@ -12,7 +12,7 @@ object Tokenize:
 
   def tokenize(s: String): Seq[String] = s.split("""\W+""").toSeq
 
-@main def TokenizeSeq: Unit = {
+@main def TokenizeSeq: Unit =
   val message = "This is Programming Scala v3"
   val limits = Seq(1, 3, 20, 100)
 
@@ -22,4 +22,3 @@ object Tokenize:
     case x => s"limit: $limit => Tokenize refused! x=$x"
 
     println(results)
-}

@@ -32,25 +32,20 @@ trait RDF { self =>
 }
 
 /* 针对不同的实现（例如，RDF4j），我们用match type来确定各种抽象类型对应的具体实现中的类型 */
-type GraphTyp[Rdf <: RDF] = Rdf match {
+type GraphTyp[Rdf <: RDF] = Rdf match
   case Rdf4j => Model
-}
 
-type TripleTyp[Rdf <: RDF] = Rdf match {
+type TripleTyp[Rdf <: RDF] = Rdf match
   case Rdf4j => Statement
-}
 
-type NodeTyp[Rdf <: RDF] = Rdf match {
+type NodeTyp[Rdf <: RDF] = Rdf match
   case Rdf4j => Value
-}
 
 /* 这是使用RDF4j实现，所以，This设置成Rdf4j */
-trait Rdf4j extends RDF {
+trait Rdf4j extends RDF:
   type This = Rdf4j
-}
 
 /* 根据PointedGraph在使用中Rdf所绑定的类型，NodeTyp[Rdf]和GraphTyp[Rdf]分别给出实现中的具体类型 */
-trait PointedGraph[Rdf <: RDF] {
+trait PointedGraph[Rdf <: RDF]:
   def pointer: NodeTyp[Rdf]  /* 我们不需要写成：Rdf#Node  */
   def graph: GraphTyp[Rdf]   /* 我们不需要写成：Rdf#Graph */
-}

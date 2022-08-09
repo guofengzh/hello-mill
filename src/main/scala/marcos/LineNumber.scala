@@ -6,14 +6,11 @@ package marcos
 
 import scala.quoted.*
 
-object LineNumber {
+object LineNumber:
 
   /** Macro for getting the file name and line number of the source code position. */
   inline def posnStr(): String = ${ posnStrImpl }
 
   def posnStrImpl(using Quotes): Expr[String] =
-  {
     val pos = quotes.reflect.Position.ofMacroExpansion
     Expr(pos.sourceFile.path + ":" + (pos.startLine + 1).toString)
-  }
-}

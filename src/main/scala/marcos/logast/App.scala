@@ -13,11 +13,9 @@ package marcos.logast
 
 import scala.quoted.*
 
-object App {
+object App:
   inline def reify(inline a: Any) = ${reifyImpl('a)}
 
-  def reifyImpl(a: Expr[Any])(using Quotes): Expr[String] = {
+  def reifyImpl(a: Expr[Any])(using Quotes): Expr[String] =
     import quotes.reflect.*
     Literal(StringConstant(Printer.TreeStructure.show(a.asTerm))).asExprOf[String]
-  }
-}

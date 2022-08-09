@@ -4,9 +4,8 @@ package typepartial
 // Usually you can achieve such an API by introducing an intermediary class. 
 // And to preserve as much type information as possible you can use a method 
 // with a dependent return type.
-class FindApplicablePartial[A] {
+class FindApplicablePartial[A]:
   def apply[B](fn: A => B): fn.type = fn
-}
 
 def findApplicable[A] = new FindApplicablePartial[A]
 

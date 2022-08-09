@@ -23,11 +23,10 @@ trait Value
   * 
   * 定义我们的抽象类型Graph、Triple和Node，使用path dependent type，来映射具体实现中的类型 
   */
-trait RDF[Rdf <: RDF[Rdf]](using val g: GraphTyp[Rdf], val t: TripleTyp[Rdf], val n: NodeTyp[Rdf]) {
+trait RDF[Rdf <: RDF[Rdf]](using val g: GraphTyp[Rdf], val t: TripleTyp[Rdf], val n: NodeTyp[Rdf]):
   type Graph = g.Out
   type Triple = t.Out
   type Node = n.Out
-}
 
 /* 这是Graph的typeclass */
 trait GraphTyp[Rdf <: RDF[Rdf]]:

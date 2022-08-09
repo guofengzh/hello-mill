@@ -9,7 +9,7 @@ inline def logAST[T](inline expression: T) = ${ logASTImpl('expression) }
 // An utility to print generic code, both AST and the code itself.
 // Useful when creating/matching AST in own macros to see how the 
 // valid code looks as AST.
-def logASTImpl[T: Type](expression: Expr[T])(using q: Quotes) : Expr[T]= {
+def logASTImpl[T: Type](expression: Expr[T])(using q: Quotes) : Expr[T]=
   import quotes.reflect.*
   val term = expression.asTerm
   println(s"===========Tree of type ${Type.show}=========:")
@@ -20,5 +20,4 @@ def logASTImpl[T: Type](expression: Expr[T])(using q: Quotes) : Expr[T]= {
   println()
   println("===========================")
   expression
-}
 

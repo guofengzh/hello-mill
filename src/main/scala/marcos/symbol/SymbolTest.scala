@@ -2,7 +2,7 @@ package macros.symbol
 
 import macros.logast.logAST
 
-@main def symbolTest() = {
+@main def symbolTest() =
 
   def printSymbols = Symbols.printSymbols()
 
@@ -23,4 +23,3 @@ import macros.logast.logAST
   // get the enclosing module of a macro call.
   // it will print: macros.symbol.SymbolTest$package$._$MyClass
   println(MyClass().macroReturnValue)
-}

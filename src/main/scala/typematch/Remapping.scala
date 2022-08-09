@@ -19,9 +19,8 @@ type AllRemapped[T <: Tuple, R <: Remapping] <: Tuple = T match
 
 type Hlp[X <: String, Rest <: Tuple] = X *: Rest
 
-type AllRemapped2[T <: Tuple, R <: Remapping] <: Tuple = T match {
+type AllRemapped2[T <: Tuple, R <: Remapping] <: Tuple = T match
   case Unit         => EmptyTuple
   case Hlp[s, rest] => Remapped[s, R] *: AllRemapped[rest, R]
-}
 
 //type AllRemapped3[T <: Tuple, R <: Remapping] = Tuple.Map[T, [X <: String] =>> Remapped[X, R]]

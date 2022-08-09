@@ -13,7 +13,7 @@ object Words:
     val words = si._1.split("""\W+""").toSeq
     new Words(words, si._2)
 
-@main def wordsSeq : Unit = {
+@main def wordsSeq : Unit =
   val books = Seq(
     "Programming Scala",
     "JavaScript: The Good Parts",
@@ -24,4 +24,3 @@ object Words:
   }
 
   println(result)
-}

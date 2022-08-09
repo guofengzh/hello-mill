@@ -18,10 +18,9 @@ private def debugImpl(exprs: Expr[Seq[Any]])(using Quotes): Expr[Unit] =
       es.map { e =>
         // if we want to inspect the shape of the code that was passed in (the Abstract Syntax Tree), 
         // we’ll have to match on the expression’s term 
-        e.asTerm match {
+        e.asTerm match
           case Literal(c: Constant) => Expr(c.value.toString)
           case _ => showWithValue(e)
-        }
       }
     case e => List(showWithValue(e))
 

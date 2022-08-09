@@ -1,6 +1,6 @@
 package macros.simple
 
-@main def simpleMacroTest() = {
+@main def simpleMacroTest() =
   
   def printConstant = SimpleMacro.printlnForConstant()
   // It will print "user1"
@@ -9,4 +9,3 @@ package macros.simple
   def printUppercase = SimpleMacro.printlnUppercase("user2")
   // It will print "USER2"
   printUppercase
-}

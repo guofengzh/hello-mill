@@ -6,7 +6,7 @@ import Nat.*
 //  type Repr <: Vect[Len, Elem]
 //}
 
-sealed trait Vect[Len <: Nat, +Elem] {
+sealed trait Vect[Len <: Nat, +Elem]:
   type Repr <: Vect[Len, Elem]
   protected def _this: Repr
 
@@ -18,9 +18,8 @@ sealed trait Vect[Len <: Nat, +Elem] {
     implicit ev: IsCons[Repr, Len, Elem0]): 
     ev.XS =       // these come from the implicit evidence - (S len) is not enough
     ev.xs(_this)
-}
 
-case object NIL extends Vect[_0, Nothing] {
+case object NIL extends Vect[_0, Nothing]:
   type Repr = NIL.type
 
   protected override def _this: Repr = this    // ??? my own gusess
@@ -28,7 +27,6 @@ case object NIL extends Vect[_0, Nothing] {
   def ::[Elem](elem: Elem): 
     Cons[_0, Elem, this.type] = 
     Cons(elem, this)
-}
 case class Cons[Len <: Nat, 
                 Elem, 
                 XS <: Vect[Len, Elem]](

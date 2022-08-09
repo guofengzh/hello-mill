@@ -1,6 +1,6 @@
 package typelevel.matrix
 
-object TM {
+object TM:
     // https://www.anycodings.com/questions/scala-3-match-type-reduction
     //
     // Let's say I want to represent a vector using anycodings_match-types a 
@@ -39,4 +39,3 @@ object TM {
     )
     */
     
-}

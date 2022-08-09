@@ -28,7 +28,7 @@ type ¬¬[A] = ¬[¬[A]]
    scala> summon[¬¬[String] <:< (Int ∨ String)]
    scala> summon[¬¬[Int] <:< (Int ∨ String)]
 */
-object UnionType {
+object UnionType:
 
   /**
    * we have subtype relationships which are isomorphic to the ones we want 
@@ -48,10 +48,9 @@ object UnionType {
    * That's why we use a implicit parameter in the size method:
    */
   def size[T](t: T)(using evidence: (¬¬[T] <:< (Int ∨ String))) =
-    t.asInstanceOf[Matchable] match {
+    t.asInstanceOf[Matchable] match
       case i: Int => i
       case s: String => s.length
-    }
 
   /**
    * The implicit evidence parameter is syntactically a bit ugly and heavyweight, 
@@ -61,20 +60,17 @@ object UnionType {
   type |∨|[T, U] = [X] =>> ¬¬[X] <:< (T ∨ U)
 
   def size2[T: |∨|[T, U], U](t: T) = // def size2[T, U](t: T)(using (T |∨| U)[T]): Int
-    t.asInstanceOf[Matchable] match {
+    t.asInstanceOf[Matchable] match
       case i: Int => i
       case s: String => s.length
-    }
 
   def size3[A: (Int |∨| String)](a: A) = 
-    a.asInstanceOf[Matchable] match {
+    a.asInstanceOf[Matchable] match
       // Scala isn’t doing coverage or possibility tests for “match”.
       // It doesn’t complain the following. But when you try to find the 
       // size of a String you get an error (if no "case s""), and 
       // the Double case of the match is inaccessible.
       case d: Double => d.toInt
-    }
-}
 
 /* 
  * NOTE
@@ -89,7 +85,7 @@ object UnionType {
  *   ¬¬[A] <: ¬¬[B]
  */
 
-@main def UnionTypeMain: Unit = {
+@main def UnionTypeMain: Unit =
     import UnionType.*
     println(size(3))
     println(size("Hello"))
@@ -99,4 +95,3 @@ object UnionType {
 
     // println(size3("Hello, world"))
     // println(size3(5.2))
-}

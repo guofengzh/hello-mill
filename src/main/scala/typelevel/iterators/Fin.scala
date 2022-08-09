@@ -7,7 +7,7 @@ case class FZ[SK <: S[?]]()
 case class FS[K <: S[?], F <: Fin[K]]() // type-level recursion
     extends Fin[S[K]]
 
-object Fin {
+object Fin:
   def finToNat[F <: Fin[?]](f: F)(
     implicit finToNat: FinToNat[F]):  // encode computation as implicit search
     finToNat.Out = finToNat()         // 1. preserve structure representation
@@ -21,7 +21,6 @@ object Fin {
     implicit natToFin: NatToFin[m.N, n.N]): 
     natToFin.Out = natToFin()    
 
-}
 
 /*
 scala> FS[_4, FZ[_4]]

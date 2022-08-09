@@ -9,14 +9,12 @@
 
 package hello
 
-object TFP {
-    def insert(rowItems: Tuple) : Unit ={
+object TFP:
+    def insert(rowItems: Tuple) : Unit =
       println(rowItems.toList)
-    }
 
     def combine(i: Int, j: Int) = i + j
 
-}
 
 @main def TFPEntry: Unit = {
     import TFP.*

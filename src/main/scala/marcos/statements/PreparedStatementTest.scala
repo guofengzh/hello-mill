@@ -2,7 +2,7 @@ package macros.statements
 
 import macros.logast.logAST
 
-@main def preparedStatemntTest(): Unit = {
+@main def preparedStatemntTest(): Unit =
 
   // Type given explicitly - better error messages than if the type is inferred.
   // Replace the name of the table or the argument with a variable - an error reported by the compiler
@@ -27,4 +27,3 @@ import macros.logast.logAST
   logAST {
     (ColDef[Int]("id"), ColDef[String]("lastName"))
   }  
-}

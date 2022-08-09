@@ -21,14 +21,14 @@ import scala.collection.* ;
   *     4th ed., Chapter 2, Adison Wesley, 2011
   * [2] Stuart Russel, Peter Norvig: "Artificial Intelligence a Modern Approach", Pearson, 2011
   */
-object Unification {
+object Unification:
   /**
    * If we unify two atoms x and y, unification succeeds (returns true) if x and y are equal.
    * 
    * For matching predicates unification succeeds if their functor and arity are the same and
    * if the recursive unification succeeds.
    */
-  def unify(x: Term, y: Term, subs: mutable.Map[Variable, Term]): Boolean = (x, y) match {
+  def unify(x: Term, y: Term, subs: mutable.Map[Variable, Term]): Boolean = (x, y) match
     case (Atom(x), Atom(y)) => x == y
     case (x: Variable, y) => unifyVar(x, y, subs)
     case (x, y: Variable) => unifyVar(y, x, subs)
@@ -36,7 +36,6 @@ object Unification {
       x.terms.zip(y.terms).map{ case (t1, t2) => unify(t1, t2, subs)}.reduce(_ && _)
     }
     case _ => false
-  }
 
   /**
    * In order to unify variables, we keep a substitution map that assigns variables to terms.
@@ -45,13 +44,10 @@ object Unification {
    * to the assigned value unification fails. Otherwise, unification succeeds and the term
    * is assigned to the variable.
    */
-  def unifyVar(x: Variable, y: Term, subs: mutable.Map[Variable, Term]): Boolean = {
+  def unifyVar(x: Variable, y: Term, subs: mutable.Map[Variable, Term]): Boolean =
      if(subs.contains(x)) then unify(subs(x), y, subs)
      else if(y.isInstanceOf[Variable] && subs.contains(y.asInstanceOf[Variable])) then unify(x, subs(y.asInstanceOf[Variable]), subs)
-     else {
+     else
        subs += (x -> y)
        true
-     }
-  }
-}
 

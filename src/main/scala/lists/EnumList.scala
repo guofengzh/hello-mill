@@ -7,7 +7,7 @@ object EnumList {
 enum List[+A]:
   case Nil
   case ::(head: A, tail: List[A])
-  def append(a1: List[A], a2: List[A]): List[A] =
+  def append[B>:A](a1: List[B], a2: List[B]): List[B] =
     a1 match
       case Nil => a2
       case ::(h,t) => ::(h, append(t, a2))
@@ -52,10 +52,9 @@ object List:
     
   def map[A, B](list: List[A])(f: A => B): List[B] =
     @annotation.tailrec
-    def _map(acc: List[B])(input: List[A])(f: A => B): List[B] = input match {
+    def _map(acc: List[B])(input: List[A])(f: A => B): List[B] = input match
       case (x::xs) => _map(::(f(x), acc))(xs)(f)
       case _ => acc
-    }
     _map(List[B]())(list)(f)
 
   def foldRight[A,B](as: List[A], acc: B, f: (A, B) => B): B =

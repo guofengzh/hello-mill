@@ -12,10 +12,9 @@ def goo[A, B](a: A) : Either[A, B] = Left(a)
 val g:[A, B] => A      => Either[A, B] = 
       [A, B] => (a: A) => goo(a)
 
-@main def TestPf: Unit = {
+@main def TestPf: Unit =
     println(f(1))
     println(f("hi"))
-}
 
 /* type lambda: one type parameter */
 type F = [X] =>> (X, X)

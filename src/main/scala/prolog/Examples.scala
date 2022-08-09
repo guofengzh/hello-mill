@@ -1,6 +1,6 @@
 package prolog
 
-object Examples {
+object Examples:
   final val EvilKing = Clause(
     Predicate("evil", List(Variable("X"))), List(
       Predicate("king",   List(Variable("X"))),
@@ -10,7 +10,7 @@ object Examples {
 
   final val FamilyKB = KnowledgeBase()
 
-  def familyTree: Unit = {
+  def familyTree: Unit =
     // small family tree
     FamilyKB tell Predicate("parent", List(Atom("daniel"),   Atom("wolfgang")))
     FamilyKB tell Predicate("parent", List(Atom("wolfgang"), Atom("werner")))
@@ -51,12 +51,9 @@ object Examples {
     )
     println(answer)
     assert(answer(0).get(Variable("P")).get == Atom("dontknow"))
-  }
-}
 
-@main def ExamplesMain: Unit = {
+@main def ExamplesMain: Unit =
   import Examples.* 
   familyTree
   println("done")
 
-}

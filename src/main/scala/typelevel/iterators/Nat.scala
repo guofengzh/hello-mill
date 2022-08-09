@@ -1,15 +1,14 @@
 package typelevel.iterators
 
-sealed trait Nat {
+sealed trait Nat:
   type N <: Nat     // type member, carraying "result"
-}
 
 case object Z 
     extends Nat {type N = Z.type}
 case class S[P <: Nat]() 
     extends Nat {type N = S[P]}
 
-object Nat {
+object Nat:
   type _0 = Z.type
   type _1 = S[_0]
   type _2 = S[_1]
@@ -34,4 +33,3 @@ object Nat {
     }
   */
 
-}

@@ -2,7 +2,7 @@ package typelevel
 /**
  * Type-Level Programming in Scala 3, Part 1: Comparing Types
  * https://blog.rockthejvm.com/type-level-programming-scala-3/
- * 
+ * https://blog.rockthejvm.com/type-level-quicksort/
  * 
  */
 trait Nat

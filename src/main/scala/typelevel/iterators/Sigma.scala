@@ -8,21 +8,18 @@ package typelevel.iterators
 
 // Σ type can be expressed in Scala (awkwardly though)
 
-trait DType[A] {
+trait DType[A]:
   type T
-}
 
-object DType {
+object DType:
   type **[A, T0] = DType[A] { type T = T0 }
   def apply[A, T0](): A ** T0 = new DType[A] { type T = T0 }
-}
 
 import DType.* 
 
-abstract class DPair[A, B](implicit P: A ** B) {
+abstract class DPair[A, B](implicit P: A ** B):
   def x: A
   def y: B
-}
 
 /*
 // Σ type - Scala examples
@@ -87,19 +84,16 @@ case class Lit[F <: Format](string: String, rest: F)
     extends Format
 case object End extends Format
 
-trait PrintfType[F <: Format] {
+trait PrintfType[F <: Format]:
   type Out
   def apply(fmt: F): String => Out
-}
-object PrintfType {
+object PrintfType:
   type Result[F <: Format, Out0] = PrintfType[F] { type Out = Out0 }
 
-  implicit val endFmt: Result[End.type, String] = new PrintfType[End.type] {
+  implicit val endFmt: Result[End.type, String] = new PrintfType[End.type]:
     type Out = String
     def apply(fmt: End.type) = identity
-  }
   // ...  
-}
 
 
 import PrintfType.*
@@ -107,19 +101,17 @@ import PrintfType.*
 implicit def numberFmt[Fmt <: Format, Rest](
     implicit printfFmt: Result[Fmt, Rest])
   : Result[Num[Fmt], Int => Rest] =
-  new PrintfType[Num[Fmt]] {
+  new PrintfType[Num[Fmt]]:
     type Out = Int => Rest
     def apply(fmt: Num[Fmt]) =
       (acc: String) => (i: Int) => printfFmt(fmt.rest)(acc + i)
-  }
 //...
 implicit def litFmt[Fmt <: Format, Rest](
     implicit printfFmt: Result[Fmt, Rest]): Result[Lit[Fmt], Rest] =
-  new PrintfType[Lit[Fmt]] {
+  new PrintfType[Lit[Fmt]]:
     type Out = Rest
     def apply(fmt: Lit[Fmt]) =
       (acc: String) => printfFmt(fmt.rest)(acc + fmt.string)
-  }
 
 def apply[F <: Format](format: F)(
     implicit printfType: PrintfType[F]): printfType.Out =
