@@ -52,7 +52,7 @@ object TestRecordKey:
          // doSomething(k, k.default) TODO
       }
 
-    // Just test that this kind of signature will work
-    def doSomething[A, K[_], V[_]](k: K[A], v: V[A]): Unit = {
-      //println(s"$k -> $v")
+      // Just test that this kind of signature will work
+      def doSomething[A, K[_], V[_]](k: K[A], v: V[A]): Unit = {
+        //println(s"$k -> $v")
     }
