@@ -1,9 +1,5 @@
 package datastruct
 
-object EnumList {
-  
-}
-
 enum SList[+A]:
   case Nil
   case Cons(head: A, tail: SList[A])
