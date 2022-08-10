@@ -13,6 +13,11 @@ enum SList[+A]:
       case Nil => num.zero
       case Cons(x,xs) => num.plus(x, xs.sum)
 
+  def sumInt[B >: A](using num: B =:= Int): Int = 
+    this match 
+      case Nil => 0
+      case Cons(x,xs) => x + xs.sumInt
+
   def product[B >: A](using num: math.Numeric[B]): B =
     this match
       case Nil => num.zero
@@ -120,3 +125,6 @@ object SList:
 @main def listTest: Unit = 
   val ls = SList(1.2, 2.3, 4.4)
   println(ls.sum)
+
+  val ls2 = SList(1, 2, 4)
+  println(ls2.sumInt)
