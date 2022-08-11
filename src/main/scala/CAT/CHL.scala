@@ -202,3 +202,142 @@ given Function1ClosedCartesianCat: ClosedCartesianCat[Function1] with
   def ap[A, B]: ((A => B, A)) => B = f => f._1(f._2)
   def curry[A, B, C]: (((A, B)) => C) => (A => (B => C)) = f => a => (b => f((a, b)))
   def uncurry[A, B, C]: (A => (B => C)) => (((A, B)) => C) = f => { case (a, b) => f(a)(b) }
+
+// Rewriting Scala code into CCC
+// ====================================
+object Scala2CCC:
+  // a very basic Scala function performing a simple operation on primitive type Int
+  def plus = (x:Int) => (y:Int) => x + y
+
+  // First, we need to reify our CCC world
+  val K = summon[ClosedCartesianCat[Function1]]
+  // now we import CCC language into our context
+  import K.*
+
+  // we can always uncurry curried function
+  uncurry((x:Int) => (y:Int) => x + y) // = (x:Int, y:Int) => x + y
+  
+  // now use product
+  ⨂((x:Int) => x + 2)((x:Int) => x * 2) // = (x:Int) => (x + 2, x * 2)
+
+  // now compose with + : (Int, Int) => Int
+  ○((x:Int) => 1 + x)((x:Int) => x)  // 
+  ○(plus)((x:Int)=> x)  // by this line, we know category theory is for compositions
+end Scala2CCC
+
+/*
+Actually, it’s not exact as + function is not a CCC operation but a Scala function on 
+primitive typed value (such as Int, Double, Float, Short, etc…). Thus, we need to augment
+our CCC by adding support for such primitive-types operations.
+*/
+// We can write this type class parameterized by the morphism and a type A 
+trait CCCNumExt[->[_, _], A]:
+  def negateC: A -> A
+  def addC: (A, A) -> A
+  def mulC: (A, A) -> A
+
+// and implement it for Function1 and any Numeric A
+given Function1CCCNumExt[A](using N: Numeric[A]): CCCNumExt[Function1, A] with
+  def negateC: A => A = {case a:A => N.negate(a) }
+  def addC: ((A, A)) => A = { case (a, b) => N.plus(a, b) }
+  def mulC: ((A, A)) => A = { case (a, b) => N.times(a, b) }
+
+
+// just note the trick: we put A in the trait type parameters
+// to be able to constrain it later with Numeric
+
+// … And finally we can use that CCCNumExt in our previous rewrite.
+object Scala2CCCv2:
+  def plus = (x:Int) => (y:Int) => x + y
+  val K = summon[ClosedCartesianCat[Function1]]
+  val E = summon[CCCNumExt[Function1, Int]]
+  import K.*, E.*
+
+  // the line on top is strictly equivalent to the following in CCC language
+  // TODO: def plusv2 = addC ○ (exl[Int, Int] ⨂ exr[Int, Int])
+end Scala2CCCv2
+
+// 为了达到这篇文章的这一点，您遭受了很多痛苦，您当然想知道为什么要付出如此多的努力来将一个不错的小
+// Scala函数重写为更不可用的东西。
+
+// The response is…
+//   CartesianClosedCat[Function1]是一个CCC，但周围还有***许多其他笛卡尔封闭范畴***，具有相同的内部语言
+// 但解释完全不同。
+//   因此，一旦您可以将Scala代码重写为CCC语言，您就可以使用任何CCC来解释它。
+
+// Graphs of computation can be CCC
+//
+// 忘记逻辑，只相信以下内容：可以在类似 kleisli 的结构中表示有向图，接受输入端口并返回提供输出端口的
+// State monad 和沿有向图构造的实例化组件列表。
+//
+// 这是 Scala 中这种 Kleisli-State-monadic-like 有向图的定义。
+//
+// A port is just identified by an Int
+type Port = Int
+
+// A component has a name and input/ouput ports
+final case class Comp[A, B](name: String, inputs: Ports[A], outputs: Ports[B])
+
+// the state monad building the list of components Comp
+type GraphM[A] = ((Port, List[Comp[?, ?]])) => ((Port, List[Comp[?, ?]]), A)
+
+// the kleisli-like directed graph structure based on state monoad
+final case class Graph[A, B](f: Ports[A] => GraphM[Ports[B]])
+
+// For info, the different type of ports
+sealed trait Ports[A]
+case object UnitP extends Ports[Unit]
+final case class BooleanP(port: Port) extends Ports[Boolean]
+final case class IntP(port: Port) extends Ports[Int]
+final case class DoubleP(port: Port) extends Ports[Double]
+final case class PairP[A, B](l: Ports[A], r: Ports[B]) extends Ports[(A, B)]
+final case class FunP[A, B](f: Graph[A, B]) extends Ports[A => B]
+
+// dummy
+class GenPorts[A] 
+given genPorts[A](using N: Numeric[A]): GenPorts[A]()
+
+// 您当然得出结论，这个 Graph[A, B] 结构使用 Graph 作为态射形成了一个很好的封闭笛卡尔范畴。
+// our CCC with Graph as morphism
+given GraphCCC: ClosedCartesianCat[Graph] with
+  // it has 9 unimplemented members.
+  /** As seen from module class GraphCCC$, the missing signatures are as follows.
+   *  For convenience, these are usable as stub implementations.
+  */
+  // Members declared in CAT.CartesianCat
+  def exl[A, B]: Graph[(A, B), A] = ???
+  def exr[A, B]: Graph[(A, B), B] = ???
+  def ⨂[A, C, D]: Graph[A, C] => Graph[A, D] => Graph[A, (C, D)] = ???
+  
+  // Members declared in Cat
+  def id[A]: Graph[A, A] = ???
+  def ○[A, B, C]: Graph[B, C] => Graph[A, B] => Graph[A, C] = ???
+  
+  // Members declared in ClosedCartesianCat
+  def ap[A, B]: Graph[(Graph[A, B], A), B] = ???
+  def curry[A, B, C]: Graph[(A, B), C] => Graph[A, B => C] = ???
+  def it[A]: Graph[A, Unit] = ???
+  def uncurry[A, B, C]: Graph[A, Graph[B, C]] => Graph[(A, B), C] = ???
+
+// we can also implement CCCNumExt for Graph
+given GraphCCCNumExt[A](using N: Numeric[A], gp: GenPorts[A]): CCCNumExt[Graph, A] with
+  // genComp just generate a component with 2 inputs, 1 output and a nice name
+  def genComp (s: String)= ???
+  def negateC: Graph[A, A]   = genComp("-")
+  def addC: Graph[(A, A), A] = genComp("+")
+  def mulC: Graph[(A, A), A] = genComp("*")
+
+object GraphTest:
+  def plus = (x:Int) => (y:Int) => x + y
+  // First, we need to reify our CCC language
+  val K = summon[ClosedCartesianCat[Graph]]
+  // First, we need to reify our CCC numeric extensions for Int (ok it's a bit hard coded but 
+  // that's not the point here ;))
+  val E = summon[CCCNumExt[Graph, Int]]
+  // now we import CCC language into our context
+  import K.*, E.*
+
+   // the line on top is strictly equivalent to the following in CCC language
+   // TODO: def plusv2 = addC ○ (exl[Int, Int] ⨂ exr[Int, Int])
+
+// 最后一个有趣的事实：2 CCC的积是 CCC，因此您可以用CCC语言编译一次Scala代码，然后将其同时运行到2个不同的CCC
