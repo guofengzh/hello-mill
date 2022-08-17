@@ -7,7 +7,7 @@
  * https://www.scala-lang.org/2021/02/26/tuples-bring-generic-programming-to-scala-3.html
  */
 
-package hello
+package tp.newsyn
 
 object TFP:
     def insert(rowItems: Tuple) : Unit =

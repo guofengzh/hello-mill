@@ -1,4 +1,4 @@
-package newsyn
+package tp.newsyn
 
 /**
  * Scala 3: The _, They Are a’Changing
