@@ -1,4 +1,4 @@
-package com.mycompany.playground
+package tp.variant
 
 sealed trait Animals 
 case class Cat() extends Animals 
