@@ -16,7 +16,7 @@ object TFP:
     def combine(i: Int, j: Int) = i + j
 
 
-@main def TFPEntry: Unit = {
+@main def TFPEntry: Unit =
     import TFP.*
     
     insert(1, "Hello", 5.4)  // the parameter is wrapped in a Tuple value
@@ -58,4 +58,3 @@ object TFP:
 
     val t = xs.map(combiner)
     println(t)
-}
