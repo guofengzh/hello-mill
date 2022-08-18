@@ -16,8 +16,7 @@ object Solution1 {
   /**
    * this is a sample implementation
    */
-  class Counter extends ICounter
-  :
+  class Counter extends ICounter:
     type T = Int
     def start = 0
     def next(current: Int) = current + 1
