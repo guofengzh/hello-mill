@@ -35,7 +35,7 @@ trait BetterFilesModule extends SbtModule {
 
   object test extends Tests with TestModule.Junit4 {
     override def ivyDeps = Agg(
-      ivy"org.scalatest::scalatest:3.2.11",
+      ivy"org.scalatest::scalatest:3.2.13",
       ivy"com.github.sbt:junit-interface:0.13.3"
     )
   }
