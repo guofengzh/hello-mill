@@ -4,6 +4,8 @@
 
 package marcos.tree
 
+import scala.language.unsafeNulls
+
 import scala.quoted.*
 
 inline def getName[T](inline f: T => Any): String = ${getNameImpl('f)}

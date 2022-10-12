@@ -1,5 +1,7 @@
 package macros.statements
 
+import scala.language.unsafeNulls
+
 // All supported database column types, in this example limited to String and Int.
 enum DbType:
   case DbInt

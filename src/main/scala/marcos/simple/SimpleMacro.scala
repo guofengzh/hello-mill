@@ -1,5 +1,7 @@
 package macros.simple
 
+import scala.language.unsafeNulls
+
 import scala.quoted.*
 
 // Very simple macros examples, just to see quotation and splicing.

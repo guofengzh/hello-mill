@@ -1,5 +1,7 @@
 package macros.statements
 
+import scala.language.unsafeNulls
+
 import scala.quoted.*
 
 // Creating a class with Quotes argument allows to share quotes and reflect import across all the
