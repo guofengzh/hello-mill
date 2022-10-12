@@ -6,7 +6,7 @@ import mill._, scalalib._
 val scala3Version = "3.2.0"
 
 trait BetterFilesModule extends SbtModule {
-  def semanticDbVersion = "4.4.29"
+  //def semanticDbVersion = "4.4.29"
   def scalaVersion = scala3Version
   // https://docs.scala-lang.org/scala3/guides/migration/options-lookup.html
   // https://docs.scala-lang.org/scala3/guides/migration/options-new.html
@@ -22,9 +22,11 @@ trait BetterFilesModule extends SbtModule {
     "-indent",           // Together with -rewrite, remove {…} syntax when possible due to significant indentation.
     //"-new-syntax",     // Require then and do in control expressions. 
                          // -- illegal combination of -rewrite targets: -new-syntax and -indent
-    "-Xsemanticdb",      // the Scala 3 compiler has built-in SemanticDB support. 
+    //"-Xsemanticdb",      // the Scala 3 compiler has built-in SemanticDB support. 
     //"-Xcheck-macros",  // Additional check useful during development
     "-Xfatal-warnings"   // Fail on warnings, not just errors
+    ,
+    "-Yexplicit-nulls"
   )
 
   // ERROR code navigation does not work for the file 
