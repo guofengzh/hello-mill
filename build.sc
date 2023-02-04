@@ -3,7 +3,7 @@
 import mill._, scalalib._
 //import mill.scalalib.bsp.ScalaMetalsSupport, coming soon in v0.10.0
 
-val scala3Version = "3.2.2-RC2"
+val scala3Version = "3.3.0-RC2"
 
 trait BetterFilesModule extends SbtModule {
   //def semanticDbVersion = "4.4.29"
