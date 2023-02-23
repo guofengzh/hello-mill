@@ -24,14 +24,12 @@ object TFP:
     val xs = List((1,3), (2,4))
 
     // in Scala 3, the following three ways are allowed
-    val a = xs map {
+    val a = xs map:
        case (x, y) => x + y // 1, pattern-matching decomposition
-    }
     println(a)
 
-    val b = xs.map {
+    val b = xs.map:
         (x, y) => x + y    // 2, a shorter and clearer alternative
-    }
     println(b)
 
     val c = xs.map(_ + _)  // 3, equivalently

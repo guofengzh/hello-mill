@@ -24,6 +24,5 @@ import macros.logast.logAST
   // statement.insert("a", "Brad")
   
   // Logged AST that was used to find out the structure of the code that was matched in the macro.
-  logAST {
+  logAST:
     (ColDef[Int]("id"), ColDef[String]("lastName"))
-  }  

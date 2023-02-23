@@ -13,9 +13,8 @@ import scala.collection.mutable
   */
 class KnowledgeBase(val program: mutable.Queue[Clause]):
 
-  def index = program.groupBy(clause => clause.head.functor).map {
+  def index = program.groupBy(clause => clause.head.functor).map:
     case (idx, clauses) => idx -> clauses.toList
-  }
 
   infix def tell(rule: Predicate, body: List[Predicate]): Unit = program.enqueue(Clause(rule, body))
 

@@ -34,7 +34,6 @@ object Bar:
     foo(5)
     foo("abc")
 
-  def fooScala3(xs: (String | Int)*) = xs foreach {
+  def fooScala3(xs: (String | Int)*) = xs foreach:
      case _: String => println("str")
      case _: Int => println("int")
-  }

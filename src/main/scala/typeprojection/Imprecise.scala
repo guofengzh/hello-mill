@@ -60,9 +60,8 @@ object GoodSolution1:  // add a type parameter P to Feature
     def precision(a: A): Precision
 
   object Imprecise:
-    type Aux[A, P] = Imprecise[A] {
+    type Aux[A, P] = Imprecise[A]:
       type Precision = P
-    }
 
   case class Bounds[N: Numeric](min: N, max: N):
     if summon[Ordering[N]].compare(min, max) > 0 then
@@ -99,9 +98,8 @@ object GoodSolution2:  //  add a type member to Feature
     def precision(a: A): Precision
 
   object Imprecise:
-    type Aux[A, P] = Imprecise[A] {
+    type Aux[A, P] = Imprecise[A]:
       type Precision = P
-    }
 
   case class Bounds[N: Numeric](min: N, max: N):
     if summon[Ordering[N]].compare(min, max) > 0 then
@@ -158,6 +156,5 @@ def f: Unit =
 trait T[A]:
   type U
 
-type Aux[A, P] = T[A] {
+type Aux[A, P] = T[A]:
   type U = P
-}

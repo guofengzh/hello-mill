@@ -15,19 +15,17 @@ object Underscore:
   val loud = Seq("hello world!").map(_.toUpperCase)
 
   // Match placeholder: _ in the first two case clauses
-  Seq(Seq('a', 'b', 'c'), Seq(1, 2, 3), Seq(1.1, 2.2)).map { 
+  Seq(Seq('a', 'b', 'c'), Seq(1, 2, 3), Seq(1.1, 2.2)).map: 
     seq => seq match 
       case 'a' +: _ => "Found a"
       case head +: _ +: last +: _ => s"Found $head and $last"
       case head +: tail => s"Other list: $seq"
-  } 
   
   // for comprehension
-  Seq(List("12345678", "1234", "12345678")).map {
+  Seq(List("12345678", "1234", "12345678")).map:
     lst => for {
       _ <- lst
     } yield ()
-  }
 
   // wild arguments of types, use "?"
   def tos(seq: Seq[?]): String = seq.mkString("[", ", ", "]") 

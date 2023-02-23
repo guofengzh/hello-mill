@@ -66,11 +66,10 @@ object Inference:
 
   type Solutions    = List[Substitution]
 
-  def substitute(x: List[Term], subs: Substitution): List[Term] = x.map {
+  def substitute(x: List[Term], subs: Substitution): List[Term] = x.map:
     case term: Variable           => subs.get(term).getOrElse(term)
     case Predicate(functor, body) => Predicate(functor, substitute(body, subs))
     case term                     => term
-  }
 
   /**
    * The last thing we need is to output all the assignments for the variables in the query 

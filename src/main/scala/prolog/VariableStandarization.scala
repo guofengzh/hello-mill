@@ -23,11 +23,10 @@ package prolog
       )
 
   def standarize(terms: List[Term]): List[Term] =
-    terms.map {
+    terms.map:
       case term: Atom[?] => term
       case Predicate(functor, body) => Predicate(functor, standarize(body))
       case x: Variable => Variable(x.name + s"_${idx}")
-    }
 
   /**
    * Standarization basically appends an id to the variable name. The id is increased 

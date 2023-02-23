@@ -10,11 +10,10 @@ import macros.logast.logAST
   printSymbols()
   
   // To find how the function definition should be constructed in the macro.
-  logAST {
+  logAST:
     def f() = {
 
     }
-  }
 
   class MyClass:
     val macroReturnValue = SomeMacro.macroCall("someExpression")

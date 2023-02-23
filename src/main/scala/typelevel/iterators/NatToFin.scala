@@ -8,9 +8,8 @@ object NatToFin:
   type Result[M <: Nat,    // encode the "result" type, known as Aux pattern
               N <: S[?], 
               F <: Fin[N]] = 
-    NatToFin[M, N] {
+    NatToFin[M, N]:
       type Out = F
-    }
   // ...
 
   import Nat.*

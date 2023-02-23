@@ -11,12 +11,16 @@ type TestMatchType[T] = T match
 
 /**
  * Use [T <: Singleton] or use 'input.type' as an argument to TestMatchType
+ * 
+ * def testMatchType[T <: Singleton](input: T): TestMatchType[T] =
  */
-def testMatchType[T <: Singleton](input: T): TestMatchType[T] =
+/* TODO 
+def testMatchType[T](input: T): TestMatchType[input.type]  =
   input match
-    case "String1": "String1" => 1
+    case "String1": "String1" => 1 // ERR: '=>' expected, but ':' found
     case "String2": "String2" => "Two"
 
 @main def TestMatchTypeMain: Unit =
     val string1Output: Int = testMatchType("String1")
     println(string1Output)
+*/

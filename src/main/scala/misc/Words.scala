@@ -21,8 +21,7 @@ object Words:
     "JavaScript: The Good Parts",
     "Scala Cookbook").zipWithIndex // add an "index"
 
-  val result = books.map {
+  val result = books.map:
     case Words(words, index) => s"$index: count = ${words.size}"
-  }
 
   println(result)
