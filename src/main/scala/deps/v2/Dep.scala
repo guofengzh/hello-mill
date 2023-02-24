@@ -5,7 +5,7 @@
  * Dependent types in Scala
  * https://partialflow.wordpress.com/2017/07/26/dependent-types-type-level-programming/
  * 
- * This cannot work, because int.+ is not induced like what does in  DepTT.scala
+ * This cannot work, because int.+ is not inducable like Succ in DepTT.scala
  */
 package deps.v2
 
