@@ -36,7 +36,7 @@ object Scala3Eval extends App:
           Var("y"))))
   
   // Provide an environment and eval the expression
-  :
+  def test1: Unit = 
     given envMap: Env = Map("x" -> 7, "y" -> 6, "z" -> 22)
 
     val eval1 = eval(exp1)
@@ -45,11 +45,10 @@ object Scala3Eval extends App:
 
     println(s"Eval exp gives $eval2")
 
-  // And again with a different environment
-  {
+  def test2: Unit =
+    // And again with a different environment
     given envMap: Env = Map("x" -> 17, "y" -> 10, "z" -> 2)
 
     val eval1 = eval(exp1)
 
     println(s"Eval exp gives $eval1")
-  }
