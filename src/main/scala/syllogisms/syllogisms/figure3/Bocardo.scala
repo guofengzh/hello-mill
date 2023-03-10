@@ -5,6 +5,10 @@ import propositions.*
 
 object Bocardo extends Syllogism:
 
+  def bocardo(major: {val x: Entity; val proof: (x.M, Not[x.P]) },
+            minor: (x: Entity) => x.M => x.S): 
+                   { val x: Entity; val proof: (x.S, Not[x.P]) } = ???
+
   // Some M are not P
   trait Major:
     val x: Entity;

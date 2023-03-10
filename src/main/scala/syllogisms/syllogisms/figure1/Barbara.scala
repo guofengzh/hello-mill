@@ -13,4 +13,6 @@ object Barbara extends Syllogism:
   type Conclusion = (x: Entity) => x.S => x.P
 
   def proof(major: Major, minor: Minor): Conclusion =
-    x => major(x) compose minor(x)
+    //x => major(x) compose minor(x)
+     x => xs => major(x)(minor(x)(xs: x.S): x.M): x.P
+
