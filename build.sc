@@ -46,6 +46,7 @@ trait BetterFilesModule extends SbtModule {
 object hellomill extends BetterFilesModule {
    def millSourcePath = build.millSourcePath
    override def ivyDeps = Agg(
-      ivy"org.tpolecat::typename:1.0.0"
+      ivy"org.tpolecat::typename:1.0.0",
+      ivy"org.typelevel::cats-core:2.9.0"
     )
 }
