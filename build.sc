@@ -1,5 +1,7 @@
 //import mill.scalalib.{SbtModule, TestModule, Dep, DepSyntax}
 
+import $ivy.`com.lihaoyi::mill-contrib-bloop:$MILL_VERSION`
+
 import mill._, scalalib._
 //import mill.scalalib.bsp.ScalaMetalsSupport, coming soon in v0.10.0
 
@@ -28,12 +30,6 @@ trait BetterFilesModule extends SbtModule {
     ,
     "-Yexplicit-nulls"
   )
-
-  // ERROR code navigation does not work for the file 
-  // '/home/gfzhang/hello-mill/src/main/scala/marcos/statements/PreparedStatementTest.scala' 
-  // because the SemanticDB file '/home/gfzhang/hello-mill/.bloop/out/helloworld/bloop-bsp-clients-classes/classes-Metals---UuUnb9S-\
-  // Wo4R7wJJGuLg==/META-INF/semanticdb/src/main/scala/marcos/statements/PreparedStatementTest.scala.semanticdb' 
-  // doesn't exist. --- fix it using -Xsemanticdb to generate the SemanticDB file '/home/gfzhang/hello-mill/.bloop/out'.
 
   object test extends JavaModuleTests with TestModule.Junit4 {
     override def ivyDeps = Agg(
