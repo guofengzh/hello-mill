@@ -35,7 +35,7 @@ trait BetterFilesModule extends SbtModule {
   // Wo4R7wJJGuLg==/META-INF/semanticdb/src/main/scala/marcos/statements/PreparedStatementTest.scala.semanticdb' 
   // doesn't exist. --- fix it using -Xsemanticdb to generate the SemanticDB file '/home/gfzhang/hello-mill/.bloop/out'.
 
-  object test extends Tests with TestModule.Junit4 {
+  object test extends JavaModuleTests with TestModule.Junit4 {
     override def ivyDeps = Agg(
       ivy"org.scalatest::scalatest:3.2.13",
       ivy"com.github.sbt:junit-interface:0.13.3"
