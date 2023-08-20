@@ -5,7 +5,7 @@ import $ivy.`com.lihaoyi::mill-contrib-bloop:$MILL_VERSION`
 import mill._, scalalib._
 //import mill.scalalib.bsp.ScalaMetalsSupport, coming soon in v0.10.0
 
-val scala3Version = "3.3.1-RC4"
+val scala3Version = "3.3.1-RC5"
 
 trait BetterFilesModule extends SbtModule {
   //def semanticDbVersion = "4.4.29"
